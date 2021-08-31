@@ -99,7 +99,7 @@ namespace demojqgrid.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    db.Entry(obj).State = EntityState.Modified;
+                    //db.Entry(obj).State = EntityState.Modified;
                     db.SaveChanges();
                     msg = "Saved Successfully";
                 }
