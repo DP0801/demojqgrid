@@ -3,20 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using System.Text.Json;
 using System.Net;
 using System.Net.Http;
 using demojqgrid.Helpers;
+using Newtonsoft.Json;
 
 namespace demojqgrid.Controllers
 {
     public class T1ServiveController : Controller
-    {
-        private readonly JsonSerializerOptions jsonSerializationOptions = new JsonSerializerOptions
-        {
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-        };
-
+    { 
         public JsonResult GetValues(string sidx, string sord, int page, int rows, bool _search, string searchField, string searchOper, string searchString) //Gets the todo Lists.  
         {
             var Results = new List<T1ServiceModel>();
@@ -26,7 +21,7 @@ namespace demojqgrid.Controllers
             baseModel.pagenumber = page;
             baseModel.pagesize = rows;
 
-            string data = JsonSerializer.Serialize(baseModel);
+            string data = JsonConvert.SerializeObject(baseModel);
             string url = string.Format("{0}T1Service/GetServiceControllerData_Count", "http://localhost:11977/api/");
             var recordCountResponse = HttpHelper.SendRequest(string.Empty, HttpMethod.Post, url, data).GetAwaiter().GetResult();
             if (recordCountResponse.StatusCode == HttpStatusCode.OK)
@@ -35,7 +30,7 @@ namespace demojqgrid.Controllers
                 var response = HttpHelper.SendRequest(string.Empty, HttpMethod.Post, url, data).GetAwaiter().GetResult();
                 if (response.StatusCode == HttpStatusCode.OK)
                 {
-                    Results = JsonSerializer.Deserialize<List<T1ServiceModel>>(response.RawResponse, this.jsonSerializationOptions);
+                    Results = JsonConvert.DeserializeObject<List<T1ServiceModel>>(response.RawResponse);
                    
                 }
             }
