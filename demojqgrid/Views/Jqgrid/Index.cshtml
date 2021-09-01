@@ -7,7 +7,7 @@
 <div>
     <table id="grid"></table>
     <div id="pager"></div>
-     
+
 </div>
 
 @section scripts{
@@ -16,111 +16,112 @@
     <script src="~/Scripts/jquery.jqGrid.min.js"></script>
     @*<script src="~/Scripts/script.js"></script>*@
 
-     
+
     <script>
-        $(function () {
-            debugger;
-            $("#grid").jqGrid
-                ({
-                    url: "/T1Servive/GetValues",
-                    datatype: 'json',
-                    mtype: 'Get',
-                    //table header name
-                    colNames: ['Id', 'ProgramId', 'ProgramName', 'Key', 'Value', 'IsActive'],
-                    //colModel takes the data from controller and binds to grid
-                    colModel: [
-                        { key: true, hidden: true, name: 'Id', index: 'Id', editable: false },
-                        { key: false, name: 'ProgramID', index: 'ProgramID', editable: false },
-                        { key: false, name: 'ProgramName', index: 'ProgramName', editable: false },
-                        { key: false, name: 'Key', index: 'Key', editable: false },
-                        { key: false, name: 'Value', index: 'Value', editable: true },
-                        { key: false, name: 'IsActive', index: 'IsActive', editable: true, edittype: 'checkbox' }
-                    ],
-                    pager: jQuery('#pager'),
-                    cloneToTop: true,
-                    toppager: true,
-                    rowNum: 10,
-                    rowList: [10, 20, 30, 40],
-                    height: '100%',
-                    viewrecords: true,
-                    caption: 'Jq grid sample Application',
-                    emptyrecords: 'No records to display',
-                    jsonReader:
-                    {
-                        root: "rows",
-                        page: "page",
-                        total: "total",
-                        records: "records",
-                        repeatitems: false,
-                        Id: "0"
-                    },
-                    autowidth: true,
-                    multiselect: false
-                    //pager-you have to choose here what icons should appear at the bottom
-                    //like edit,create,delete icons
-                }).navGrid('#pager',
-                    {
-                        cloneToTop: true,  
-                        edit: true,
-                        add: true,
-                        addtext:"Add Setting",
-                        del: false,
-                        search: true,
-                        searchtext: "Search Student",
-                        refresh: true
-                    }, {
-                    // edit options
-                    zIndex: 100,
-                    url: '/Jqgrid/Edit',
-                    closeOnEscape: true,
-                    closeAfterEdit: true,
-                    recreateForm: true,
-                    afterComplete: function (response) {
-                        if (response.responseText) {
-                            alert(response.responseText);
-                        }
-                    }
-                }, {
-                    // add options
-                    zIndex: 100,
-                    url: "/Jqgrid/Create",
-                    closeOnEscape: true,
-                    closeAfterAdd: true,
-                    afterComplete: function (response) {
-                        if (response.responseText) {
-                            alert(response.responseText);
-                        }
-                    }
-                }, {
-                    // delete options
-                    zIndex: 100,
-                    url: "/Jqgrid/Delete",
-                    closeOnEscape: true,
-                    closeAfterDelete: true,
-                    recreateForm: true,
-                    msg: "Are you sure you want to delete this student?",
-                    afterComplete: function (response) {
-                        if (response.responseText) {
-                            alert(response.responseText);
-                        }
-                    }
-                },
-                    {
+            $(function () {
+                debugger;
+                $("#grid").jqGrid
+                    ({
+                        url: "/T1Servive/GetValues",
+                        datatype: 'json',
+                        mtype: 'Get',
+                        //table header name
+                        colNames: ['Id', 'ProgramId', 'ProgramName', 'Key', 'Value', 'IsActive'],
+                        //colModel takes the data from controller and binds to grid
+                        colModel: [
+                            { key: true, hidden: true, name: 'Id', index: 'Id', editable: false },
+                            { key: false, name: 'ProgramID', index: 'ProgramID', editable: false },
+                            { key: false, name: 'ProgramName', index: 'ProgramName', editable: false },
+                            { key: false, name: 'Key', index: 'Key', editable: false },
+                            { key: false, name: 'Value', index: 'Value', editable: true },
+                            { key: false, name: 'IsActive', index: 'IsActive', editable: true, edittype: 'checkbox' }
+                        ],
+                        pager: jQuery('#pager'),
+                        cloneToTop: true,
+                        toppager: true,
+                        rowNum: 10,
+                        rowList: [10, 20, 30, 40],
+                        height: '100%',
+                        viewrecords: true,
+                        //loadonce:true,
+                        caption: 'Jq grid sample Application',
+                        emptyrecords: 'No records to display',
+                        jsonReader:
+                        {
+                            root: "rows",
+                            page: "page",
+                            total: "total",
+                            records: "records",
+                            repeatitems: false,
+                            Id: "0"
+                        },
+                        autowidth: true,
+                        multiselect: false
+                        //pager-you have to choose here what icons should appear at the bottom
+                        //like edit,create,delete icons
+                    }).navGrid('#pager',
+                        {
+                            cloneToTop: true,
+                            edit: true,
+                            add: true,
+                            addtext: "Add Setting",
+                            del: false,
+                            search: true,
+                            searchtext: "Search Student",
+                            refresh: true
+                        }, {
+                        // edit options
                         zIndex: 100,
-                        caption: "Search Students",
-                        sopt: ['cn']
-                    });
-             
-            //$("#grid").jqGrid('filterToolbar', { stringResult: true, searchOnEnter: false });
-        });
-    </script>
+                        url: '/Jqgrid/Edit',
+                        closeOnEscape: true,
+                        closeAfterEdit: true,
+                        recreateForm: true,
+                        afterComplete: function (response) {
+                            if (response.responseText) {
+                                alert(response.responseText);
+                            }
+                        }
+                    }, {
+                        // add options
+                        zIndex: 100,
+                        url: "/Jqgrid/Create",
+                        closeOnEscape: true,
+                        closeAfterAdd: true,
+                        afterComplete: function (response) {
+                            if (response.responseText) {
+                                alert(response.responseText);
+                            }
+                        }
+                    }, {
+                        // delete options
+                        zIndex: 100,
+                        url: "/Jqgrid/Delete",
+                        closeOnEscape: true,
+                        closeAfterDelete: true,
+                        recreateForm: true,
+                        msg: "Are you sure you want to delete this student?",
+                        afterComplete: function (response) {
+                            if (response.responseText) {
+                                alert(response.responseText);
+                            }
+                        }
+                    },
+                        {
+                            zIndex: 100,
+                            caption: "Search Students",
+                            sopt: ['cn']
+                        });
+
+                $("#grid").jqGrid('filterToolbar', { stringResult: true, searchOnEnter: false });
+            });
+        </script>
 
     @*<script>
             $(function () {
                 debugger;
                 $("#grid").jqGrid
                     ({
-                        url: "/T1Servive/GetValues",
+                        url: "/Jqgrid/GetValues",
                         datatype: 'json',
                         mtype: 'Get',
                         //table header name
@@ -218,4 +219,149 @@
                         });
             });
         </script>*@
+
+    @*<script>
+        var mydata = [{
+            EID: "8",
+            EmployeeName: "Name 1",
+            EmployeeIndex: "10.00",
+            EmployedDate: "2010-05-24",
+            CurrentlyEmployed: true,
+            SiteID: "a"
+        }, {
+            EID: "67",
+            EmployeeName: "Name 2",
+            EmployeeIndex: "20.00",
+            EmployedDate: "2010-05-25",
+            CurrentlyEmployed: false,
+            SiteID: "b"
+        }, {
+            EID: "34",
+            EmployeeName: "Name 3",
+            EmployeeIndex: "30.00",
+            EmployedDate: "2007-09-01",
+            CurrentlyEmployed: true,
+            SiteID: "c"
+        }, {
+            EID: "14",
+            EmployeeName: "Name 4",
+            EmployeeIndex: "10.00",
+            EmployedDate: "2007-10-04",
+            CurrentlyEmployed: false,
+            SiteID: "d"
+        }, {
+            EID: "52",
+            EmployeeName: "Name 5",
+            EmployeeIndex: "20.00",
+            EmployedDate: "2007-10-05",
+            CurrentlyEmployed: true,
+            SiteID: "e"
+        }, {
+            EID: "6",
+            EmployeeName: "Name 6",
+            EmployeeIndex: "30.00",
+            EmployedDate: "2007-09-06",
+            CurrentlyEmployed: false,
+            SiteID: "f"
+        }, {
+            EID: "2",
+            EmployeeName: "Name 7",
+            EmployeeIndex: "10.00",
+            EmployedDate: "2007-10-04",
+            CurrentlyEmployed: true,
+            SiteID: "g"
+        }
+            , {
+            EID: "9",
+            EmployeeName: "testing 9",
+            EmployeeIndex: "10.00",
+            EmployedDate: "2007-10-04",
+            CurrentlyEmployed: true,
+            SiteID: "g"
+        }, {
+            EID: "10",
+            EmployeeName: "testing 10",
+            EmployeeIndex: "10.00",
+            EmployedDate: "2007-10-04",
+            CurrentlyEmployed: true,
+            SiteID: "g"
+        }, {
+            EID: "11",
+            EmployeeName: "testing 11",
+            EmployeeIndex: "10.00",
+            EmployedDate: "2007-10-04",
+            CurrentlyEmployed: true,
+            SiteID: "g"
+        }, {
+            EID: "12",
+            EmployeeName: "ZZZ 12",
+            EmployeeIndex: "10.00",
+            EmployedDate: "2007-10-04",
+            CurrentlyEmployed: true,
+            SiteID: "g"
+        }
+        ];
+
+        $(function () {
+            var grid = jQuery("#grid");
+            grid.jqGrid({
+                //data: mydata,
+                //datatype: "local",
+                url: "/T1Servive/GetValues",
+                datatype: 'json',
+                mtype: 'Get',
+                height: 200,
+                hidegrid: false, //hides the arrow button at the top right corner for collapsing the jqGrid
+                rowNum: 10,
+                rowList: [10, 20, 30],
+                viewrecords: true,
+                loadonce: true,
+                fromServer: true,
+                caption: "Employees",
+                ignoreCase: true,
+                pager: "#pager",
+                colNames: ['Id', 'ProgramId', 'ProgramName', 'Key', 'Value', 'IsActive'],
+                //colModel takes the data from controller and binds to grid
+                colModel: [
+                    { key: true, hidden: true, name: 'Id', index: 'Id', editable: false },
+                    { key: false, name: 'ProgramID', index: 'ProgramID', editable: false, searchoptions: { sopt: ['cn', 'eq', 'ne'] } },
+                    { key: false, name: 'ProgramName', index: 'ProgramName', editable: false },
+                    { key: false, name: 'Key', index: 'Key', editable: false },
+                    { key: false, name: 'Value', index: 'Value', editable: true },
+                    { key: false, name: 'IsActive', index: 'IsActive', editable: true, edittype: 'checkbox' }
+                ],
+                jsonReader:
+                {
+                    root: "rows",
+                    page: "page",
+                    total: "total",
+                    records: "records",
+                    repeatitems: false,
+                    Id: "0"
+                },
+            });
+
+            var filters =
+            {
+                "groupOp": "OR",
+                "rules": [{ "field": "a.id", "op": "eq", "data": "1" }],
+                "groups": [
+                    {
+                        "groupOp": "AND",
+                        "rules": [{ "field": "a.id", "op": "eq", "data": "2" }],
+                    }
+                ]
+            }
+            grid.jqGrid('filterToolbar', filters);
+
+            
+        });
+
+       
+        
+
+        function linkFormatter(cellValue, options, rowdata, action) {
+            return "<a href='https://praneethmoka.wordpress.com?rid=" + options.rowId + "' target='_blank'>Click here</a>";
+        }
+    </script>*@
 }
