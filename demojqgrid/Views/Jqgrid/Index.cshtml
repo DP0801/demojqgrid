@@ -6,8 +6,8 @@
 <h2>jQGrid List</h2>
 <div>
     <table id="grid"></table>
-
     <div id="pager"></div>
+     
 </div>
 
 @section scripts{
@@ -15,6 +15,8 @@
     <script src="~/Scripts/i18n/grid.locale-en.js"></script>
     <script src="~/Scripts/jquery.jqGrid.min.js"></script>
     @*<script src="~/Scripts/script.js"></script>*@
+
+     
     <script>
         $(function () {
             debugger;
@@ -27,43 +29,16 @@
                     colNames: ['Id', 'ProgramId', 'ProgramName', 'Key', 'Value', 'IsActive'],
                     //colModel takes the data from controller and binds to grid
                     colModel: [
-                        {
-                            key: true,
-                            hidden: true,
-                            name: 'Id',
-                            index: 'Id',
-                            editable: false
-                        }, {
-                            key: false,
-                            name: 'ProgramID',
-                            index: 'ProgramID',
-                            editable: false
-                        }, {
-                            key: false,
-                            name: 'ProgramName',
-                            index: 'ProgramName',
-                            editable: false
-                        }, {
-                            key: false,
-                            name: 'Key',
-                            index: 'Key',
-                            editable: false
-                        }, {
-                            key: false,
-                            name: 'Value',
-                            index: 'Value',
-                            editable: true
-                        }, {
-                            key: false,
-                            name: 'IsActive',
-                            index: 'IsActive',
-                            editable: true,
-                            edittype:'checkbox'
-                        }
-
+                        { key: true, hidden: true, name: 'Id', index: 'Id', editable: false },
+                        { key: false, name: 'ProgramID', index: 'ProgramID', editable: false },
+                        { key: false, name: 'ProgramName', index: 'ProgramName', editable: false },
+                        { key: false, name: 'Key', index: 'Key', editable: false },
+                        { key: false, name: 'Value', index: 'Value', editable: true },
+                        { key: false, name: 'IsActive', index: 'IsActive', editable: true, edittype: 'checkbox' }
                     ],
-
                     pager: jQuery('#pager'),
+                    cloneToTop: true,
+                    toppager: true,
                     rowNum: 10,
                     rowList: [10, 20, 30, 40],
                     height: '100%',
@@ -85,9 +60,11 @@
                     //like edit,create,delete icons
                 }).navGrid('#pager',
                     {
+                        cloneToTop: true,  
                         edit: true,
                         add: true,
-                        del: true,
+                        addtext:"Add Setting",
+                        del: false,
                         search: true,
                         searchtext: "Search Student",
                         refresh: true
@@ -133,6 +110,8 @@
                         caption: "Search Students",
                         sopt: ['cn']
                     });
+             
+            //$("#grid").jqGrid('filterToolbar', { stringResult: true, searchOnEnter: false });
         });
     </script>
 
